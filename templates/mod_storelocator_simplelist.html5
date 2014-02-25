@@ -1,0 +1,46 @@
+<?php if (count($this->entries) > 0): ?>
+<section class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+	<?php if( $this->headline ): ?>
+		<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+	<?php endif; ?>
+
+
+	<table>
+	<thead>
+	<th class="col_first">Abteilung</th>
+	<th>Kontakt</th>
+	<th class="col_last">weitere Infos</th>
+	</thead>
+	<tbody>
+
+
+
+	<?php if( !$this->error ): ?>
+		<?php foreach( $this->entries as $entry ): ?>
+			<tr>
+				<td><h3><?php echo $entry['name']; ?></h3></td>
+				<td>
+					<p>
+						<?php echo $entry['city']; ?><br />
+					</p>
+
+				</td>
+				<td>
+
+					<?php if( $entry['link'] ): ?>
+						<a href="<?php echo $entry['link']; ?>" class="more"><?php echo $GLOBALS['TL_LANG']['tl_storelocator']['field']['more']; ?></a>
+					<?php endif; ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+		</table>
+
+
+	<?php else: ?>
+		<p class="error"><?php echo $GLOBALS['TL_LANG']['tl_storelocator']['noresults']; ?></p>
+	<?php endif; ?>
+
+	</section>
+<?php endif; ?>
