@@ -34,9 +34,27 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['storelocator_list_categories'] = arra
     'label'                   => &$GLOBALS['TL_LANG']['tl_module']['storelocator_list_categories'],
 	'exclude'                 => true,
 	'inputType'               => 'checkbox',
-	'options_callback'        => array( 'tl_module_storelocator', 'getCategories' ),
+	'options_callback'        => array( 'tl_module_storelocator_simplelist', 'getCategories' ),
 	'eval'                    => array( 'mandatory'=>true, 'multiple'=>true )
 );
 
 
+class tl_module_storelocator_simplelist extends \Backend {
+
+
+    public function getCategories() {
+    
+		$arrCalendars = array();
+		$objCalendars = $this->Database->execute("SELECT id, title FROM tl_storelocator_category ORDER BY title");
+
+		while ($objCalendars->next())
+		{
+				$arrCalendars[$objCalendars->id] = $objCalendars->title;
+		}
+
+		return $arrCalendars;
+    }
+	
+
+}
  ?>
